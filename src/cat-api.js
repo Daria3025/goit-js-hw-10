@@ -8,7 +8,7 @@ axios.defaults.headers.common['x-api-key'] = API_KEY;
 
 export function fetchBreeds() {
   return axios.get(`${BASE_URL}/breeds`).then(response => {
-    if (!response.ok) {
+    if (response.status !== 200) {
       throw new Error(response.status);
     }
     return response.data;
@@ -19,7 +19,7 @@ export function fetchCatByBreed(breedId) {
   return axios
     .get(`${BASE_URL}/images/search?breed_ids=${breedId}`)
     .then(response => {
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error(response.status);
       }
       return response.data;
